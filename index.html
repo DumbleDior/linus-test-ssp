@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/schere-stein-papier.png" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+    <title>✂️🪨🧻</title>
+  </head>
+  <body>
+    <div id="app" class="flex flex-col space-y-10">
+      <div class="flex flex-row space-x-5 m-auto">
+        <button onclick="spielerAuswahl('Schere')" class="p-32">Schere✂️</button>
+        <button onclick="spielerAuswahl('Stein')" class="p-32">Stein🪨</button>
+        <button onclick="spielerAuswahl('Papier')" class="p-32">Papier🧻</button>
+      </div>
+      <div id="result"></div>
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script>
+      function spielerAuswahl(auswahl) {
+        const zufallsZahl = Math.floor(Math.random() * 3) + 1;
+
+        let ergebnis;
+
+          switch (zufallsZahl) {
+            case 1:
+              ergebnis = "Schere";
+              break;
+            case 2:
+              ergebnis = "Stein";
+              break;
+            case 3:
+              ergebnis = "Papier";
+              break;
+            default:
+              ergebnis = "Ungültige Auswahl";
+        }
+
+        let gewinner;
+
+          if (auswahl === ergebnis) {
+                gewinner = "Unentschieden!";
+            } else if (
+                (auswahl === "Schere" && ergebnis === "Papier") ||
+                (auswahl === "Stein" && ergebnis === "Schere") ||
+                (auswahl === "Papier" && ergebnis === "Stein")
+            ) {
+                gewinner = "Du gewinnst!";
+            } else {
+                gewinner = "Der Computer gewinnt!";
+        }
+        $("#result").html(`${gewinner} Du hast ${auswahl} ausgewählt. Der Computer wählt ${ergebnis}.`)
+        //alert(`${gewinner} Du hast ${auswahl} ausgewählt. Der Computer wählt ${ergebnis}.`);
+      }
+    </script>
+  </body>
+</html>
